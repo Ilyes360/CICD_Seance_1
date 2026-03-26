@@ -15,7 +15,7 @@ def get_etudiant_by_id_get(request, student_id):
     try:
         parsed_id = int(student_id)
     except (TypeError, ValueError):
-        return JsonResponse({"error": "ID invalide."}, status=400)
+        return JsonResponse({"error": "ID invalide."}, status=404)
 
     students = get_etudiants()
     student = next((item for item in students if item.id == parsed_id), None)
