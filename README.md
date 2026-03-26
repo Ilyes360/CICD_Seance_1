@@ -53,6 +53,14 @@ Puis ouvrir:
 
 - http://127.0.0.1:8000/api/etudiants/
 
+## Integration continue (CI)
+
+Le workflow GitHub Actions est defini dans `.github/workflows/ci.yml`.
+
+- Declenchement sur `push` et `pull_request` vers `main`
+- Execution en matrix Python: `3.12` et `3.13`
+- Etapes: installation dependances, lint Ruff, tests Pytest
+
 ## Architecture actuelle
 
 - `server/`: point de demarrage Django (`manage.py`)
