@@ -1,0 +1,18 @@
+[lint]
+# Core checks:
+# - F: Pyflakes (unused imports/variables, undefined names, etc.)
+# - E/W: pycodestyle (style and indentation consistency)
+# - T20: flake8-print (forbid forgotten print statements)
+select = ["E", "F", "W", "T20"]
+ignore = ["E501"]
+
+# Keep common generated folders out of lint scope.
+exclude = [
+  "venv",
+  ".pytest_cache",
+  ".ruff_cache",
+]
+
+[format]
+# Enforce a coherent indentation style.
+indent-style = "space"

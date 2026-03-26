@@ -171,6 +171,8 @@ Organisation:
 
 ```powershell
 .\scripts\lint.ps1
+# ou (commande simple Windows):
+.\scripts\lint.cmd
 # ou:
 venv\Scripts\python -m ruff check --config config\lint\ruff.toml .
 ```
