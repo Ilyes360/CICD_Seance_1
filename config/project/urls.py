@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from src.routes.students_api import get_etudiant_by_id, list_etudiants
+from src.routes.students_api import etudiants_collection, get_etudiant_by_id
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/etudiants/', list_etudiants, name='list-etudiants'),
+    path('api/etudiants/', etudiants_collection, name='etudiants-collection'),
     path('api/etudiants/<student_id>/', get_etudiant_by_id, name='get-etudiant-by-id'),
 ]
