@@ -5,5 +5,6 @@ if (-not (Test-Path $python)) {
   throw "Virtualenv introuvable: $python"
 }
 
-& $python -m ruff check . @args
+$ruffConfig = Join-Path $PSScriptRoot "..\config\lint\ruff.toml"
+& $python -m ruff check --config $ruffConfig . @args
 

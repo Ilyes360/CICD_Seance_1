@@ -7,7 +7,7 @@ Start the Django server:
 ```powershell
 .\scripts\start-server.ps1
 # or:
-venv\Scripts\python manage.py runserver
+venv\Scripts\python server\manage.py runserver
 ```
 
 Optional: choose host/port:
@@ -35,6 +35,6 @@ Run the linter (Ruff):
 ```powershell
 .\scripts\lint.ps1
 # or:
-venv\Scripts\python -m ruff check .
+venv\Scripts\python -m ruff check --config config\lint\ruff.toml .
 ```
 

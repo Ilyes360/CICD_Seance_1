@@ -6,5 +6,5 @@ if (-not (Test-Path $python)) {
 }
 
 # Start Django server (passes the provided arguments to runserver)
-& $python (Join-Path $PSScriptRoot "..\manage.py") runserver @args
+& $python (Join-Path $PSScriptRoot "..\server\manage.py") runserver @args
 
