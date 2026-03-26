@@ -129,3 +129,51 @@ def get_etudiant_by_id(request, student_id):
     ETUDIANTS_JSON[student_index] = updated_student
     return JsonResponse(updated_student, status=200)
 
+
+@require_http_methods(["GET"])
+def etudiants_stats(request):
+    """Return statistics for all students."""
+    students = get_etudiants()
+
+    total_students = len(students)
+    if total_students == 0:
+        payload = {
+            "totalStudents": 0,
+            "averageGrade": 0.0,
+            "StudentByField": {},
+            "bestStudent": 0.0,
+        }
+        return JsonResponse(payload, status=200)
+
+    average_grade = round(sum(student.grade for student in students) / total_students, 2)
+    students_by_field: dict[str, int] = {}
+    for student in students:
+        students_by_field[student.field] = students_by_field.get(student.field, 0) + 1
+
+    best_grade = max(student.grade for student in students)
+
+    payload = {
+        "totalStudents": total_students,
+        "averageGrade": average_grade,
+        "StudentByField": students_by_field,
+        "bestStudent": best_grade,
+    }
+    return JsonResponse(payload, status=200)
+
+
+@require_http_methods(["GET"])
+def search_etudiants(request):
+    """Search students by first or last name (case-insensitive)."""
+    term = request.GET.get("term")
+    if term is None or term.strip() == "":
+        return JsonResponse({"error": "Le parametre 'term' est obligatoire et non vide."}, status=400)
+
+    normalized_term = term.strip().lower()
+    students = get_etudiants()
+    matches = [
+        asdict(student)
+        for student in students
+        if normalized_term in student.firstName.lower() or normalized_term in student.lastName.lower()
+    ]
+    return JsonResponse(matches, safe=False, status=200)
+
